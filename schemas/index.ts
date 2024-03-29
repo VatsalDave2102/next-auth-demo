@@ -15,15 +15,23 @@ export const SettingsSchema = z
 			if (data.password && !data.newPassword) {
 				return false;
 			}
-
+			return true;
+		},
+		{
+			message: "New password is required",
+			path: ["newPassword"],
+		}
+	)
+	.refine(
+		(data) => {
 			if (data.newPassword && !data.password) {
 				return false;
 			}
 			return true;
 		},
 		{
-			message: "New password is required",
-			path: ["newPassword"],
+			message: "Password is required",
+			path: ["password"],
 		}
 	);
 
